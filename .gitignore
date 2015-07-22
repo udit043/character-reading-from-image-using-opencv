@@ -85,7 +85,7 @@ blackwhite=cvLoadImage("blacknwhite.jpg",1);
 analyze=cvCreateImage(cvSize(blackwhite->width, blackwhite->height ),blackwhite->depth, blackwhite->nChannels );
 
 uchar *qinput = (uchar*)blackwhite->imageData;               //saving data pointer of input image as pinput
-uchar *qoutput = ( uchar* )analyze->imageData;           //saving data pointer of blacknwhite image as poutput
+
 //FILE *p;p=fopen("art.txt","a");
 cout<<endl<<blackwhite->height<<" "<<blackwhite->width<<endl;
 for(i=0;i<blackwhite->height;i++)                                               // height = i = height
@@ -106,29 +106,18 @@ for(i=0;i<blackwhite->height;i++)                                               
 		}
 		if((r>=220)&&(g>=220)&&(b>=220))  //white to white
 		{
-			pl=2;
-			r1=qinput[(i+2)*blackwhite->widthStep + (j+2)*blackwhite->nChannels + 2];
-			b1=qinput[(i+2)*blackwhite->widthStep + (j+2)*blackwhite->nChannels + 0];
-			g1=qinput[(i+2)*blackwhite->widthStep + (j+2)*blackwhite->nChannels + 1];
-			if((r==r1)&&(b==b1)&&(g==g1))
-		   {
-			   if((h1==0)&&(w1==0))
-			   {h1=i;w1=j;}
 
-			   h2=i;w2=j;
-			   if((h2>h1+30)&&((w2-16)<(w1+16))) {rect();}
-			}
 		}
 		if(pl==1)
 		{
-			qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 2]=0;
+		   qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 2]=0;
 		   qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 0]=0;
 		   qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 1]=0;
 		}
 		if(pl==2)
 		{
          
-         //cout<<endl<<i<<" "<<j;
+                        //cout<<endl<<i<<" "<<j;
 			qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 2]=r;
 			qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 0]=b;
 			qoutput[i*blackwhite->widthStep + j*blackwhite->nChannels + 1]=g;
@@ -137,16 +126,6 @@ for(i=0;i<blackwhite->height;i++)                                               
 	}
 }
 rect();
-//cvRectangle(analyze,cvPoint(w1-20,h1-4),cvPoint(w2+6,h2+4),cvScalar(55,248,35));cout<<endl<<w1-20<<" "<<h1-4<<endl<<w2+6<<" "<<h2+4;
-//cvRectangle(analyze,cvPoint(w1,h1),cvPoint(w2,h2),cvScalar(55,248,35));
-cout<<"\nh1 is : "<<h1<<" w1 is : "<<w1<<endl<<"h2 is : "<<h2<<" w2 is : "<<w2<<endl;
-
-
-CvFont *font= new CvFont;
-cvInitFont(font,CV_FONT_HERSHEY_TRIPLEX ,1.2f,2.3f,2,3,6);
-char A[2]="A";
-//cvPutText(analyze,A,Point(w1-17,h1+35),font,CV_RGB(0,255,255));
-//cvPutText(analyze,text,Point(w1+29,h1+36),font,CV_RGB(0,255,255));
 
 
 cvNamedWindow("analyze",CV_WINDOW_AUTOSIZE);
@@ -159,9 +138,7 @@ return 0;
 void rect()
 {
 	cvRectangle(analyze,cvPoint(w1+6,h1-3),cvPoint(w2+9,h2+3),cvScalar(55,248,35));
-	//cvRectangle(analyze,cvPoint(w1-20,h1-4),cvPoint(w2+14,h2+4),cvScalar(55,248,35));
-	//cout<<endl<<w1-20<<" "<<h1-4<<endl<<w2+6<<" "<<h2+4;
-	h1=0;w1=0;
+
 }
 void endrect()
 {
