@@ -106,7 +106,18 @@ for(i=0;i<blackwhite->height;i++)                                               
 		}
 		if((r>=220)&&(g>=220)&&(b>=220))  //white to white
 		{
-
+		        pl=2;
++			r1=qinput[(i+2)*blackwhite->widthStep + (j+2)*blackwhite->nChannels + 2];
++			b1=qinput[(i+2)*blackwhite->widthStep + (j+2)*blackwhite->nChannels + 0];
++			g1=qinput[(i+2)*blackwhite->widthStep + (j+2)*blackwhite->nChannels + 1];
++			if((r==r1)&&(b==b1)&&(g==g1))
++		        {
++			     if((h1==0)&&(w1==0))
++			     {h1=i;w1=j;}
++
++			     h2=i;w2=j;
++			     if((h2>h1+30)&&((w2-16)<(w1+16))) {rect();}
++			}
 		}
 		if(pl==1)
 		{
@@ -126,7 +137,7 @@ for(i=0;i<blackwhite->height;i++)                                               
 	}
 }
 rect();
-
+cout<<"\nh1 is : "<<h1<<" w1 is : "<<w1<<endl<<"h2 is : "<<h2<<" w2 is : "<<w2<<endl;
 
 cvNamedWindow("analyze",CV_WINDOW_AUTOSIZE);
 cvShowImage("analyze",analyze);
